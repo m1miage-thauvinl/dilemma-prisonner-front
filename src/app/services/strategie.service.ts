@@ -6,4 +6,8 @@ import { Injectable } from '@angular/core';
 export class StrategieService {
 
   constructor() { }
+
+  getAllStrategies() {
+    return ["Strat 1", "Strat 2", "Strat 3"];
+  }
 }

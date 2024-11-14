@@ -6,4 +6,13 @@ import { Injectable } from '@angular/core';
 export class PartieService {
 
   constructor() { }
+
+  postPartieFinie() {
+
+  }
+
+  postNewJoueur() : number {
+    return 0;
+    //return 1;
+  }
 }

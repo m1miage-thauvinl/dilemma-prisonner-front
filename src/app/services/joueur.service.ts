@@ -6,4 +6,8 @@ import { Injectable } from '@angular/core';
 export class JoueurService {
 
   constructor() { }
+
+  getScoreJoueur(idJoueur: number) {
+    return 0;
+  }
 }

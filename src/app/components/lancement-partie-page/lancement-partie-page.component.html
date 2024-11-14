@@ -1,1 +1,24 @@
-<p>lancement-partie-page works!</p>
+<div class="content">
+<h3>Quel est ton nom ?</h3>
+<input type ="text"/>
+<div *ngIf="isPremierJoueur()">
+  <h3>Combien de tours souhaites-tu jouer ?</h3>
+  <input type="number"/>
+</div>
+<h3>Quelle strategie ?</h3>
+<mat-form-field>
+  <mat-select>
+    @for (strategie of strategies; track $index){
+      <mat-option>{{ strategie }}</mat-option>
+    }
+  </mat-select>
+</mat-form-field>
+<div>
+  @if(isPremierJoueur()){
+    <button mat-flat-button (click)="jouer()">Jouer</button>
+  }
+  @if(isDeuxiemeJoueur()){
+    <button mat-flat-button (click)="rejoindre()">Rejoindre</button>
+  }
+</div>
+</div>

@@ -1,1 +1,23 @@
-<p>tour-page works!</p>
+<div class="content">
+  <div class="header">
+    <h1>Tour {{numTour}} sur {{nbTourTotal}}</h1>
+    <mat-icon fontIcon="clear" style="fill:grey" href="" (click)="quitterPartie()"></mat-icon>
+  </div>
+  <div *ngif="isPartieFinie()">
+    <p> Au revoir ! </p>
+  </div>
+
+  <mat-card>
+    <button mat-fab extended (click)="cooperer()">
+      <mat-icon fontIcon="mood">
+      </mat-icon>
+      Coopérer
+    </button>
+    <button mat-fab extended (click)="trahir()">
+      <mat-icon fontIcon="sentiment_very_dissatisfied">
+      </mat-icon>
+      Trahir
+    </button>
+  </mat-card>
+  <p>Votre score est de : {{scoreTotalJoueur}}</p>
+</div>
