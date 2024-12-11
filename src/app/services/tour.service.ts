@@ -14,6 +14,6 @@ export class TourService {
   }
 
   postJouer(idJoueur: number, decision: string) : number {
-    
+    return 0;
   }
 }
