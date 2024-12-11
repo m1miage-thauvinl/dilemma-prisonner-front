@@ -1,1 +1,1 @@
-web: npx http-server dist/dilemma-prisonner-front -p $PORT
+web: npx http-server dist/dilemma-prisonner-front/browser -p $PORT
