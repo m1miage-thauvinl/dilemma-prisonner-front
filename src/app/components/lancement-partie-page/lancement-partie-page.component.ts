@@ -6,11 +6,14 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {PartieService} from '../../services/partie.service';
 import {StrategieService} from '../../services/strategie.service';
 import { JoueurService } from '../../services/joueur.service';
-
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-lancement-partie-page',
   standalone: true,
   imports: [
+    FormsModule,
     NgIf,
     MatSelect,
     MatOption,
@@ -27,7 +30,7 @@ export class LancementPartiePageComponent {
   nbTours: number = 0;
   strategieChoisie: string = "Toujours coopérer";
   nomJoueur: string = "newJoueur";
-  idJoueur: any;
+  idJoueur: number = 0;
 
   @Input ({required : true})
     get v() {return this.isPremierJoueur()}
@@ -46,12 +49,12 @@ export class LancementPartiePageComponent {
     this.isDeuxiemeJoueur.set(isDeux)
   }
   rejoindre() {
-    this.partieService.postNewJoueur(this.nomJoueur, this.nbTours).then(tour => { this.idJoueur = tour.joueur1Id })
+    this.partieService.postNewJoueur(this.nomJoueur, this.nbTours).then(tour => { this.idJoueur = tour.joueur2Id })
     this.router.navigate(["/tour-jeu", 1, this.idJoueur, this.strategieChoisie, this.nbTours])
   }
 
   jouer() {
-    this.partieService.postNewJoueur(this.nomJoueur, this.nbTours).then(tour => { this.idJoueur = tour.joueur2Id })
+    this.partieService.postNewJoueur(this.nomJoueur, this.nbTours).then(tour => { this.idJoueur = tour.joueur1Id })
     this.router.navigate(["/tour-jeu", 0, this.idJoueur, this.strategieChoisie, this.nbTours])
   }
 }

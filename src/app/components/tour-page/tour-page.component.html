@@ -1,6 +1,6 @@
 <div class="content">
   <div class="header">
-    <h1>Tour {{numTour}} sur {{nbTourTotal}}</h1>
+    <h1>Tour {{numTour}} sur {{nbTourTotal()}}</h1>
     <mat-icon fontIcon="clear" style="fill:grey" href="" (click)="quitterPartie()"></mat-icon>
   </div>
   <div *ngif="isPartieFinie()">

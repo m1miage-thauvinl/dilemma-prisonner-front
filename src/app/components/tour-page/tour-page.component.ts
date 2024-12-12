@@ -36,9 +36,14 @@ export class TourPageComponent {
   constructor(private tourService : TourService, private partieService : PartieService, private joueurService : JoueurService, private router : Router, private route: ActivatedRoute) {
   }
   ngOnInit() {
-    const id : string | null = this.route.snapshot.paramMap.get('idJoueur');
-    if(id) this.isJoueur1.set(parseInt(id, 10));
-
+    const isPrem : string | null = this.route.snapshot.paramMap.get('isJoueur1');
+    if(isPrem) this.isJoueur1.set(parseInt(isPrem, 10));
+    const idJoueur : string | null = this.route.snapshot.paramMap.get('idJoueur');
+    if(idJoueur) this.idJoueur.set(parseInt(idJoueur, 10));
+    const strategieChoisie : string | null = this.route.snapshot.paramMap.get('strategieChoisie');
+    if(strategieChoisie) this.strategieChoisie.set(strategieChoisie);
+    const nbTourTotal : string | null = this.route.snapshot.paramMap.get('nbTourTotal');
+    if(nbTourTotal) this.nbTourTotal.set(parseInt(nbTourTotal, 10));
   }
 
   trahir() {

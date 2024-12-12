@@ -18,10 +18,17 @@ import { JoueurService } from '../../services/joueur.service';
 export class AcceuilPageComponent {
   isPremierJoueur : Signal<boolean> = computed(()=>false);
   isDeuxiemeJoueur : Signal<boolean> = computed(()=>false);
+
   constructor(private joueurService : JoueurService, private router : Router) {
-    this.joueurService.getNbJoueurs().then(nbJoueurs => {
+    /*this.joueurService.getNbJoueurs().then(nbJoueurs => {
       this.isDeuxiemeJoueur = computed(() => nbJoueurs == 0);
       this.isDeuxiemeJoueur = computed(() => nbJoueurs == 1);
+    });*/
+  }
+  ngOnInit() {
+    this.joueurService.getNbJoueurs().then(nbJoueurs => {
+      this.isPremierJoueur = computed(() => nbJoueurs == 0);
+      this.isDeuxiemeJoueur = computed(() => nbJoueurs >= 1);
     });
   }
   jouer() {

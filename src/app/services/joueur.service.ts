@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable({
@@ -7,11 +7,11 @@ import { firstValueFrom } from 'rxjs';
 })
 export class JoueurService {
 
-  baseURL : string = "https://prisonners-dilemma-g1-6-9c636af5bfc2.herokuapp.com/api/joueurs/player";
+  baseURL : string = "https://prisonners-dilemma-g1-6-9c636af5bfc2.herokuapp.com/api/joueurs";
   constructor(private httpService : HttpClient) { }
 
   async getNbJoueurs() : Promise<number> {
-    return (await firstValueFrom(this.httpService.get<Object[]>(this.baseURL + "/all"))).length;
+    return (await firstValueFrom(this.httpService.get<Object[]>(this.baseURL + "/players/all"))).length;
   }
   async getScoreJoueur(idJoueur: number) : Promise<number> {
     return await firstValueFrom(this.httpService.get<number>(this.baseURL + "/" + idJoueur + "/score"));
