@@ -5,6 +5,7 @@ import {MatButton} from '@angular/material/button';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PartieService} from '../../services/partie.service';
 import {StrategieService} from '../../services/strategie.service';
+import { JoueurService } from '../../services/joueur.service';
 
 @Component({
   selector: 'app-lancement-partie-page',
@@ -23,6 +24,11 @@ export class LancementPartiePageComponent {
 
   isPremierJoueur = signal<boolean>(false);
   isDeuxiemeJoueur  = signal<boolean>(false);
+  nbTours: number = 0;
+  strategieChoisie: string = "Toujours coopérer";
+  nomJoueur: string = "newJoueur";
+  idJoueur: any;
+
   @Input ({required : true})
     get v() {return this.isPremierJoueur()}
     set v(b : boolean){this.isPremierJoueur.set(b)}
@@ -40,10 +46,12 @@ export class LancementPartiePageComponent {
     this.isDeuxiemeJoueur.set(isDeux)
   }
   rejoindre() {
-    this.router.navigate(["/tour-jeu", 1])
+    this.partieService.postNewJoueur(this.nomJoueur, this.nbTours).then(tour => { this.idJoueur = tour.joueur1Id })
+    this.router.navigate(["/tour-jeu", 1, this.idJoueur, this.strategieChoisie, this.nbTours])
   }
 
   jouer() {
-    this.router.navigate(["/tour-jeu", 0])
+    this.partieService.postNewJoueur(this.nomJoueur, this.nbTours).then(tour => { this.idJoueur = tour.joueur2Id })
+    this.router.navigate(["/tour-jeu", 0, this.idJoueur, this.strategieChoisie, this.nbTours])
   }
 }

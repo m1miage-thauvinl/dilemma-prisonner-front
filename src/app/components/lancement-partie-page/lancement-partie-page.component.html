@@ -1,13 +1,13 @@
 <div class="content">
 <h3>Quel est ton nom ?</h3>
-<input type ="text"/>
+<input type ="text" [(value)]="nomJoueur"/>
 <div *ngIf="isPremierJoueur()">
   <h3>Combien de tours souhaites-tu jouer ?</h3>
-  <input type="number"/>
+  <input type="number" [(value)]="nbTours"/>
 </div>
 <h3>Quelle strategie ?</h3>
 <mat-form-field>
-  <mat-select>
+  <mat-select [(value)]="strategieChoisie">
     @for (strategie of strategies; track $index){
       <mat-option>{{ strategie }}</mat-option>
     }

@@ -3,6 +3,7 @@ import {MatButton} from '@angular/material/button';
 import {Router} from '@angular/router';
 import {NgIf} from '@angular/common';
 import {PartieService} from '../../services/partie.service';
+import { JoueurService } from '../../services/joueur.service';
 
 @Component({
   selector: 'app-acceuil-page',
@@ -17,9 +18,11 @@ import {PartieService} from '../../services/partie.service';
 export class AcceuilPageComponent {
   isPremierJoueur : Signal<boolean> = computed(()=>false);
   isDeuxiemeJoueur : Signal<boolean> = computed(()=>false);
-  constructor(private partieService : PartieService, private router : Router) {
-    this.isPremierJoueur = computed(()=>this.partieService.postNewJoueur()==0);
-    this.isDeuxiemeJoueur = computed(()=>this.partieService.postNewJoueur()==1);
+  constructor(private joueurService : JoueurService, private router : Router) {
+    this.joueurService.getNbJoueurs().then(nbJoueurs => {
+      this.isDeuxiemeJoueur = computed(() => nbJoueurs == 0);
+      this.isDeuxiemeJoueur = computed(() => nbJoueurs == 1);
+    });
   }
   jouer() {
     this.router.navigate(['/lancement-partie', this.isPremierJoueur(), this.isDeuxiemeJoueur()])

@@ -19,41 +19,51 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrl: './tour-page.component.css'
 })
 export class TourPageComponent {
-  numTour: number;
-  nbTourTotal: number;
+  numTour: number = 0;
   partieFinie = signal<boolean>(false);
 
   //a mettre en input
-
+  @Input({required : true}) isJoueur1 =signal<number>(0);
   @Input({required : true}) idJoueur =signal<number>(0);
-  scoreTotalJoueur: number;
+  @Input({required:true}) strategieChoisie = signal<string>("Toujours coopérer");
+  @Input({required:true}) nbTourTotal = signal<number>(0);
+  scoreTotalJoueur: number=0;
 
   decisionAdversaire : string = "Cooperer";
   pointsGagnes : number = 0;
 
 
   constructor(private tourService : TourService, private partieService : PartieService, private joueurService : JoueurService, private router : Router, private route: ActivatedRoute) {
-    this.numTour = this.tourService.getNumTourCourant();
-    this.nbTourTotal= this.tourService.getNbTourTotal();
-    this.scoreTotalJoueur = this.joueurService.getScoreJoueur(this.idJoueur());
   }
   ngOnInit() {
     const id : string | null = this.route.snapshot.paramMap.get('idJoueur');
-    if(id) this.idJoueur.set(parseInt(id, 10));
+    if(id) this.isJoueur1.set(parseInt(id, 10));
 
   }
 
   trahir() {
-      this.pointsGagnes = this.tourService.postJouer(this.idJoueur(), "Trahir")
+      this.tourService.postJouer(this.idJoueur(), "TRAHIR").then(points => {
+        this.pointsGagnes = points;
+        this.joueurService.getScoreJoueur(this.idJoueur()).then(score => {
+          this.scoreTotalJoueur = score;
+        });
+      });
+      this.numTour++;
   }
 
   cooperer() {
-    this.tourService.postJouer(this.idJoueur(), "Cooperer")
+    this.tourService.postJouer(this.idJoueur(), "COOPERER").then(points => {
+      this.pointsGagnes = points;
+      this.joueurService.getScoreJoueur(this.idJoueur()).then(score => {
+        this.scoreTotalJoueur = score;
+      });
+    });
+    this.numTour++;
   }
 
 
   quitterPartie() {
-    this.partieService.postPartieFinie()
+    this.joueurService.postPartieFinie(this.idJoueur(), this.strategieChoisie())
     this.partieFinie.set(true)
     this.router.navigate(["/acceuil"])
   }

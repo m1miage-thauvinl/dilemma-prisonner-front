@@ -9,7 +9,7 @@ export class StrategieService {
   baseURL : string = "https://prisonners-dilemma-g1-6-9c636af5bfc2.herokuapp.com/api/strategies";
   constructor(private httpService : HttpClient) { }
 
-  getAllStrategies() {
-    return this.httpService.get(this.baseURL);
+  getAllStrategies(): string[] {
+    return ["Toujours coopérer", "Toujours trahir", "Donnant-donnant", "Aléatoire", "Pavlov"];
   }
 }
