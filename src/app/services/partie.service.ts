@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,14 +6,11 @@ import { Injectable } from '@angular/core';
 })
 export class PartieService {
 
-  constructor() { }
+  baseURL : string = "https://prisonners-dilemma-g1-6-9c636af5bfc2.herokuapp.com/api/parties";
+  constructor(private httpClient : HttpClient) { }
 
   postPartieFinie() {
-
+    this.httpClient.post(this.baseURL + "/finie", {});
   }
 
-  postNewJoueur() : number {
-    return 0;
-    //return 1;
-  }
 }

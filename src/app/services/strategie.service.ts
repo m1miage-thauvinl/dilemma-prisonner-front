@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,9 +6,10 @@ import { Injectable } from '@angular/core';
 })
 export class StrategieService {
 
-  constructor() { }
+  baseURL : string = "https://prisonners-dilemma-g1-6-9c636af5bfc2.herokuapp.com/api/strategies";
+  constructor(private httpService : HttpClient) { }
 
   getAllStrategies() {
-    return ["Strat 1", "Strat 2", "Strat 3"];
+    return this.httpService.get(this.baseURL);
   }
 }
