@@ -27,7 +27,7 @@ export class LancementPartiePageComponent {
 
   isPremierJoueur = signal<boolean>(false);
   isDeuxiemeJoueur  = signal<boolean>(false);
-  nbTours: number = 0;
+  nbTours: number = 1;
   strategieChoisie: string = "Toujours coopérer";
   nomJoueur: string = "newJoueur";
   idJoueur: number = 0;
@@ -49,12 +49,20 @@ export class LancementPartiePageComponent {
     this.isDeuxiemeJoueur.set(isDeux)
   }
   rejoindre() {
-    this.partieService.postNewJoueur(this.nomJoueur, this.nbTours).then(tour => { this.idJoueur = tour.joueur2Id })
-    this.router.navigate(["/tour-jeu", 1, this.idJoueur, this.strategieChoisie, this.nbTours])
+    if(this.nbTours>0){
+      this.partieService.postNewJoueur(this.nomJoueur, this.nbTours).then(tour => { this.idJoueur = tour.joueur2Id })
+      this.router.navigate(["/tour-jeu", 1, this.idJoueur, this.strategieChoisie, this.nbTours])
+    }else{
+      console.log("Nombre de tours invalide")
+    }
   }
 
   jouer() {
+    if(this.nbTours>0){
     this.partieService.postNewJoueur(this.nomJoueur, this.nbTours).then(tour => { this.idJoueur = tour.joueur1Id })
     this.router.navigate(["/tour-jeu", 0, this.idJoueur, this.strategieChoisie, this.nbTours])
+    }else{
+      console.log("Nombre de tours invalide")
+    }
   }
 }
