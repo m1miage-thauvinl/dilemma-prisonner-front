@@ -1,24 +1,39 @@
 <div class="content">
-<h3>Quel est ton nom ?</h3>
-<input type ="text" [(ngModel)]="nomJoueur" #nom/>
-<div *ngIf="isPremierJoueur()">
-  <h3>Combien de tours souhaites-tu jouer ?</h3>
-  <input type="number" min="1" max="10" [(ngModel)]="nbTours"/>
-</div>
-<h3>Quelle strategie ?</h3>
+  <div class="players">
+    <div>
+<h3>Quel est le nom du joueur 1?</h3>
+<input type ="text" #nom [(ngModel)]="joueur1().id"/>
+<h3>Quelle est la strategie du joueur 1 ?</h3>
 <mat-form-field>
-  <mat-select [(value)]="strategieChoisie">
+  <mat-select [(ngModel)]="joueur1().strategy">
     @for (strategie of strategies; track $index){
       <mat-option [value]=strategie>{{ strategie }}</mat-option>
     }
   </mat-select>
 </mat-form-field>
+    </div>
+    <div>
+    <h3>Quel est le nom du joueur 2?</h3>
+    <input type ="text" #nom [(ngModel)]="joueur2().id"/>
+    <h3>Quelle est la strategie du joueur 2 ?</h3>
+    <mat-form-field>
+      <mat-select [(ngModel)]="joueur2().strategy">
+        @for (strategie of strategies; track $index){
+          <mat-option [value]=strategie>{{ strategie }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+    </div>
+</div>
+  <div>
+    <h3>Combien de tours souhaitez-vous jouer ?</h3>
+    <input type="number" min="1" max="10" #n [value]="nbTours()"
+           (input)="nbTours.set(n.valueAsNumber)"/>
+  </div>
 <div>
-  @if(isPremierJoueur()){
-    <button mat-flat-button (click)="jouer()">Jouer</button>
-  }
-  @if(isDeuxiemeJoueur()){
-    <button mat-flat-button (click)="rejoindre()">Rejoindre</button>
-  }
+    <button mat-flat-button (click)="demarrerPartie()">Jouer</button>
 </div>
 </div>
+<pre>
+  {{this.partieState()|json}}
+</pre>

@@ -14,7 +14,7 @@
           "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/dilemma-prisonner-front",
-            "baseHref": "/https://github.com/m1miage-thauvinl/dilemma-prisonner-front/",
+            "baseHref": "/",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -103,5 +103,5 @@
   "cli": {
     "analytics": "3c85dac4-b38f-4caa-8e83-6e7e52e106da"
   }
-  
+
 }

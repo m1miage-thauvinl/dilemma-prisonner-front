@@ -1,23 +1,25 @@
+<pre>
+  {{faireChoix(this.partieState().joueurs[1].strategy)}}
+</pre>
 <div class="content">
   <div class="header">
-    <h1>Tour {{numTour}} sur {{nbTourTotal()}}</h1>
-    <mat-icon fontIcon="clear" style="fill:grey" href="" (click)="quitterPartie()"></mat-icon>
+    <h1>Tour {{numTour}} sur {{partieState().nbTours}} </h1>
+    <mat-icon fontIcon="clear" style="fill:grey" href="" ></mat-icon>
   </div>
-  <div *ngif="isPartieFinie()">
-    <p> Au revoir ! </p>
-  </div>
-
   <mat-card>
-    <button mat-fab extended (click)="cooperer()">
+    <button mat-fab extended (click)="jouer('cooperer')">
       <mat-icon fontIcon="mood">
       </mat-icon>
       Coopérer
     </button>
-    <button mat-fab extended (click)="trahir()">
+    <button mat-fab extended (click)="jouer('trahir')">
       <mat-icon fontIcon="sentiment_very_dissatisfied">
       </mat-icon>
       Trahir
     </button>
   </mat-card>
-  <p>Votre score est de : {{scoreTotalJoueur}}</p>
+  <h6>Au joueur {{joueurCourant().id}} de jouer</h6>
+  <p>Score joueur 1 : {{partieState().joueurs[0].score}}</p>
+  <p>Score joueur 2 : {{partieState().joueurs[1].score}}</p>
+  <button (click)="quitterPartie()">Quitter</button>
 </div>

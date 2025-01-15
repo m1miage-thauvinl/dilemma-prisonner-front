@@ -12,50 +12,66 @@
   text-align: center;
 }
 
-/* Heading styling */
-.content h3 {
-  font-size: 1.3em;
-  font-weight: 400;
-  color: #444;
+/* Players section styling */
+.players {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 20px;
+}
+
+.players > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 45%;
+}
+
+/* Headings inside the players section */
+.players h3 {
+  font-size: 1.25em;
+  font-weight: 500;
+  color: #555;
   margin-bottom: 10px;
 }
 
 /* Input field styling */
-input[type="text"],
-input[type="number"] {
+input[type="text"], input[type="number"] {
   font-size: 1em;
-  padding: 8px 12px;
+  padding: 8px;
   width: 100%;
   max-width: 300px;
-  margin: 10px 0;
+  margin: 5px 0 15px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  transition: border-color 0.3s ease;
+  box-sizing: border-box;
 }
 
-input[type="text"]:focus,
-input[type="number"]:focus {
-  outline: none;
+input[type="text"]:focus, input[type="number"]:focus {
   border-color: #1976d2;
+  outline: none;
+  box-shadow: 0 0 5px rgba(25, 118, 210, 0.5);
 }
 
-/* Form field and select styling */
+/* Mat-form-field styling */
 mat-form-field {
   width: 100%;
   max-width: 300px;
-  margin: 15px 0;
+  margin-bottom: 15px;
 }
 
 mat-select {
-  width: 100%;
-}
-
-mat-option {
   font-size: 1em;
   color: #333;
 }
 
-/* Button styling */
+mat-option {
+  font-size: 1em;
+  padding: 10px;
+}
+
+/* Button styling (reuse from home page) */
 button[mat-flat-button] {
   font-size: 1em;
   font-weight: 500;
@@ -76,4 +92,17 @@ button[mat-flat-button]:hover {
 button[mat-flat-button]:active {
   background-color: #0d47a1;
   transform: translateY(0);
+}
+
+/* Preformatted text styling */
+pre {
+  background-color: #eaeaea;
+  color: #333;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 800px;
+  overflow-x: auto;
+  font-size: 0.9em;
 }

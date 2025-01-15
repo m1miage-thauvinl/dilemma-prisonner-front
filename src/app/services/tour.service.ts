@@ -17,7 +17,7 @@ export class TourService {
   }*/
 
   async postJouer(idJoueur: number, decision: string) : Promise<number> {
-   return await firstValueFrom(this.httpService.post<number>(this.baseURL + "/play", {idJoueur: idJoueur, decision: decision}));
+   return await firstValueFrom(this.httpService.post<number>(this.baseURL + "/play", {idJoueur: idJoueur, decisionJoueur1: decision}));
   }
 }
 export interface Tour {

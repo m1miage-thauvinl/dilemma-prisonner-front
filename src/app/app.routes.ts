@@ -4,8 +4,8 @@ import {AcceuilPageComponent} from './components/acceuil-page/acceuil-page.compo
 import {LancementPartiePageComponent} from './components/lancement-partie-page/lancement-partie-page.component';
 
 export const routes: Routes = [
-  {path: 'tour-jeu/:isJoueur1/:idJoueur/:strategieChoisie/:nbTourTotal', title: 'Jeu', component: TourPageComponent},
+  {path: 'tour-jeu', title: 'Jeu', component: TourPageComponent},
   {path: 'acceuil', title: 'Acceuil', component: AcceuilPageComponent},
-  {path: 'lancement-partie/:isPrem/:isDeux', title: 'Lancement Partie', component: LancementPartiePageComponent},
+  {path: 'lancement-partie', title: 'Lancement Partie', component: LancementPartiePageComponent},
   {path : '**', redirectTo : '/acceuil'}
 ];
